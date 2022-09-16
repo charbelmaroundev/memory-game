@@ -1,3 +1,7 @@
+///////////////////
+// ELEMENTS
+///////////////////
+
 const tableEl = document.getElementById('table');
 const timerEl = document.querySelector('.timer');
 const movesEl = document.querySelector('.moves');
@@ -7,6 +11,10 @@ const resultEl = document.querySelector('.result')
 let firstSelection, secondSelection, selections, moves;
 let second, interval, interval1;
 let delay = 1000;
+
+///////////////////
+// CARDS
+///////////////////
 
 const cards = [{
     name: "javascript",
@@ -21,6 +29,9 @@ const cards = [{
     image: "assets/sql.svg",
 }];
 
+///////////////////
+// SHUFFLE CARDS
+///////////////////
 
 const shuffle = () => {
     let cardSlice = cards.slice(0, 3);
@@ -49,6 +60,10 @@ const shuffle = () => {
     });
 }
 
+///////////////////
+// START THE GAME
+///////////////////
+
 const startGame = () => {
     interval = setInterval(() => {
         resultEl.innerHTML = ""
@@ -63,6 +78,10 @@ const startGame = () => {
     shuffle();
 }
 startGame();
+
+///////////////////
+// ON CLICK LISTENER
+///////////////////
 
 tableEl.addEventListener('click', event => {
     let clicked = event.target;
@@ -90,6 +109,10 @@ tableEl.addEventListener('click', event => {
     }
 });
 
+///////////////////
+// MOVES
+///////////////////
+
 
 const movesCounter = () => {
     moves++;
@@ -100,12 +123,20 @@ const movesCounter = () => {
     }
 }
 
+///////////////////
+// TIMER
+///////////////////
+
 const startTimer = () => {
     interval = setInterval(() => {
         timerEl.innerHTML = second + ' secs';
         second++;
     }, 1000);
 }
+
+///////////////////
+// COMPARE THE CARDS
+///////////////////
 
 let level = 0;
 const match = () => {
@@ -119,7 +150,6 @@ const match = () => {
             resultEl.style.color = "green"
             level++;
             levelEl.innerHTML = `level ${level}`
-            console.log("WIN");
             clearInterval(interval);
             cleanTable();
             startGame();
@@ -127,6 +157,9 @@ const match = () => {
     });
 };
 
+///////////////////
+// CHECK IF THE TIME AND NUMBER OF MOVES
+///////////////////
 
 interval1 = setInterval(() => {
     if (second >= 11 || moves >= 11) {
@@ -139,9 +172,6 @@ interval1 = setInterval(() => {
 }, 1000);
 
 
-
-
-
 const resetSelections = () => {
     firstSelection = '';
     secondSelection = '';
@@ -151,6 +181,10 @@ const resetSelections = () => {
         card.classList.remove('selected');
     });
 };
+
+///////////////////
+// RESET BUTTON
+///////////////////
 
 restartBtn.addEventListener('click', () => {
     clearInterval(interval);
@@ -163,13 +197,3 @@ const cleanTable = () => {
         tableEl.removeChild(tableEl.firstChild);
     }
 }
-
-// const gameOver = () => {
-//     interval1 = setInterval(() => {
-//         if (second == 4) {
-//             console.log("HAHAHAs");
-//         }
-//     }, 1000);
-// }
-
-// gameOver()
