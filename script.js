@@ -1,5 +1,5 @@
 const tableEl = document.getElementById('table');
-const timer = document.querySelector('.timer');
+const timerEl = document.querySelector('.timer');
 const movesEl = document.querySelector('.moves');
 const restartBtn = document.querySelector('.restart');
 let firstSelection, secondSelection, selections, moves;
@@ -53,7 +53,7 @@ const startGame = () => {
     moves = 0;
     second = 0;
     moves.textContent = 0;
-    timer.textContent = " 0 secs";
+    timerEl.textContent = " 0 secs";
     shuffle();
 }
 startGame();
@@ -74,13 +74,46 @@ tableEl.addEventListener('click', event => {
                 secondSelection = clicked.parentNode.dataset.name;
                 clicked.parentNode.classList.add('selected');
             }
+            if (firstSelection && secondSelection) {
+                if (firstSelection === secondSelection) {
+                    setTimeout(match, delay);
+                }
+                // setTimeout(resetSelections, delay);
+            }
         }
     }
 });
 
 const movesCounter = () => {
     moves++;
+    moves.textContent = moves;
     if (moves === 1) {
-        timer.textContent = '0 secs';
+        timerEl.textContent = '0 secs';
+        startTimer();
     }
 }
+
+const startTimer = () => {
+    interval = setInterval(() => {
+        timerEl.innerHTML = second + ' secs';
+        second++;
+    }, 1000);
+}
+
+const match = () => {
+    const selected = document.querySelectorAll('.selected');
+    selected.forEach(card => {
+        card.classList.add('match');
+    });
+};
+
+const resetSelections = () => {
+    firstSelection = '';
+    secondSelection = '';
+    selections = 0;
+
+    const selected = document.querySelectorAll('.selected');
+    selected.forEach(card => {
+        card.classList.remove('selected');
+    });
+};
