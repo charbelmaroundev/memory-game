@@ -2,8 +2,10 @@ const tableEl = document.getElementById('table');
 const timerEl = document.querySelector('.timer');
 const movesEl = document.querySelector('.moves');
 const restartBtn = document.querySelector('.restart');
+const levelEl = document.querySelector('.level');
+const resultEl = document.querySelector('.result')
 let firstSelection, secondSelection, selections, moves;
-let second, interval;
+let second, interval, interval1;
 let delay = 1000;
 
 const cards = [{
@@ -48,6 +50,9 @@ const shuffle = () => {
 }
 
 const startGame = () => {
+    interval = setInterval(() => {
+        resultEl.innerHTML = ""
+    }, 5000);
     firstSelection = '';
     secondSelection = '';
     selections = 0;
@@ -85,6 +90,7 @@ tableEl.addEventListener('click', event => {
     }
 });
 
+
 const movesCounter = () => {
     moves++;
     movesEl.textContent = moves;
@@ -101,18 +107,45 @@ const startTimer = () => {
     }, 1000);
 }
 
+let level = 0;
 const match = () => {
     const selected = document.querySelectorAll('.selected');
     selected.forEach(card => {
         card.classList.add('match');
+        card.remove()
+        const cardEl = document.querySelectorAll(".card")
+        if (cardEl.length === 0 && moves <= 10 && second <= 10) {
+            resultEl.innerHTML = "YOU WIN"
+            resultEl.style.color = "green"
+            level++;
+            levelEl.innerHTML = `level ${level}`
+            console.log("WIN");
+            clearInterval(interval);
+            cleanTable();
+            startGame();
+        }
     });
 };
+
+
+interval1 = setInterval(() => {
+    if (second >= 11 || moves >= 11) {
+        resultEl.innerHTML = "YOU LOOSE"
+        resultEl.style.color = "red"
+        clearInterval(interval);
+        cleanTable();
+        startGame();
+    }
+}, 1000);
+
+
+
+
 
 const resetSelections = () => {
     firstSelection = '';
     secondSelection = '';
     selections = 0;
-
     const selected = document.querySelectorAll('.selected');
     selected.forEach(card => {
         card.classList.remove('selected');
@@ -130,3 +163,13 @@ const cleanTable = () => {
         tableEl.removeChild(tableEl.firstChild);
     }
 }
+
+// const gameOver = () => {
+//     interval1 = setInterval(() => {
+//         if (second == 4) {
+//             console.log("HAHAHAs");
+//         }
+//     }, 1000);
+// }
+
+// gameOver()
