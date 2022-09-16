@@ -45,3 +45,69 @@ body {
     cursor: pointer;
     padding: 1rem 2.2rem;
 }
+
+#table {
+    width: 700px;
+    height: 600px;
+    box-shadow: 2px 2px 10px white;
+    border-radius: 15px;
+    background-color: #fff;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin: auto;
+    position: relative;
+    transition: all .4s linear;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.card,
+.retro,
+.front {
+    border-radius: 15px;
+    height: 250px;
+    width: 180px;
+}
+
+.retro,
+.front {
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.retro {
+    background: black;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.front {
+    transform: rotateY(180deg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.selected {
+    transform: rotateY(180deg);
+}
+
+.match .retro {
+    background: #fff !important;
+}
+
+#rotate-screen {
+    display: none;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #afdde9;
+}
