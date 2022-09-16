@@ -3,7 +3,8 @@ const timerEl = document.querySelector('.timer');
 const movesEl = document.querySelector('.moves');
 const restartBtn = document.querySelector('.restart');
 let firstSelection, secondSelection, selections, moves;
-let second;
+let second, interval;
+let delay = 1000;
 
 const cards = [{
     name: "javascript",
@@ -52,7 +53,7 @@ const startGame = () => {
     selections = 0;
     moves = 0;
     second = 0;
-    moves.textContent = 0;
+    movesEl.textContent = 0;
     timerEl.textContent = " 0 secs";
     shuffle();
 }
@@ -78,7 +79,7 @@ tableEl.addEventListener('click', event => {
                 if (firstSelection === secondSelection) {
                     setTimeout(match, delay);
                 }
-                // setTimeout(resetSelections, delay);
+                setTimeout(resetSelections, delay);
             }
         }
     }
@@ -86,7 +87,7 @@ tableEl.addEventListener('click', event => {
 
 const movesCounter = () => {
     moves++;
-    moves.textContent = moves;
+    movesEl.textContent = moves;
     if (moves === 1) {
         timerEl.textContent = '0 secs';
         startTimer();
@@ -117,3 +118,15 @@ const resetSelections = () => {
         card.classList.remove('selected');
     });
 };
+
+restartBtn.addEventListener('click', () => {
+    clearInterval(interval);
+    cleanTable();
+    startGame();
+});
+
+const cleanTable = () => {
+    while (tableEl.firstChild) {
+        tableEl.removeChild(tableEl.firstChild);
+    }
+}
