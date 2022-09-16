@@ -57,3 +57,30 @@ const startGame = () => {
     shuffle();
 }
 startGame();
+
+tableEl.addEventListener('click', event => {
+    let clicked = event.target;
+
+    if (clicked.parentNode.classList.contains('card') &&
+        !(clicked.parentNode.classList.contains('selected')) &&
+        !(clicked.parentNode.classList.contains('match'))) {
+        if (selections < 2) {
+            movesCounter();
+            selections++;
+            if (selections === 1) {
+                firstSelection = clicked.parentNode.dataset.name;
+                clicked.parentNode.classList.add('selected');
+            } else {
+                secondSelection = clicked.parentNode.dataset.name;
+                clicked.parentNode.classList.add('selected');
+            }
+        }
+    }
+});
+
+const movesCounter = () => {
+    moves++;
+    if (moves === 1) {
+        timer.textContent = '0 secs';
+    }
+}
