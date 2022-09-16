@@ -35,15 +35,21 @@ body {
     margin-left: 3rem;
 }
 
-.restart button {
+.restart {
+    width: 70px;
+    height: 25px;
     background-color: black;
     color: white;
     border-radius: 10px;
     border: none;
     outline: none;
-    margin: 0 0 1.5rem 3rem;
+    margin: 0 1rem;
     cursor: pointer;
-    padding: 1rem 2.2rem;
+    padding: auto;
+}
+
+.level {
+    margin: 0 3rem;
 }
 
 #table {
