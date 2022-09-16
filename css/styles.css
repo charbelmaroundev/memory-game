@@ -7,3 +7,41 @@
 html {
     font-size: 62.5%;
 }
+
+body {
+    background-color: gray;
+}
+
+.header {
+    width: 100%;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 3rem;
+    margin: 5rem;
+    color: #fff;
+}
+
+.score-panel {
+    margin: 2rem auto;
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.timer {
+    margin-left: 3rem;
+}
+
+.restart button {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin: 0 0 1.5rem 3rem;
+    cursor: pointer;
+    padding: 1rem 2.2rem;
+}
